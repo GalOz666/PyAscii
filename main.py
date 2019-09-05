@@ -7,15 +7,13 @@ from colr import Colr as c
 KERN = 3
 
 ascii_fillers = ["*", "&", "#", "@", "0", "%", "^", "S", "=", "~", ":" ","]
-# up = GreyCharacter("|", [[0, 1, 0]*3])
-# middle = GreyCharacter("--", [[0, 0, 0], [1, 1, 1], [0, 0, 0]])
 
 
 color_img = resize_by_multiples(Image.open("ravi.jpeg"), KERN)
 mode_filter = ImageFilter.ModeFilter(size=KERN)
 
-color_img = ImageOps.posterize(color_img, 3).filter(mode_filter).filter(ImageFilter.EDGE_ENHANCE_MORE)
-
+color_img = color_img.filter(mode_filter).filter(ImageFilter.EDGE_ENHANCE_MORE)
+color_img = ImageOps.posterize(color_img, 3)
 grey_img = color_img.convert("L")
 # clamp_img = grey_img.point(lambda i: grey_highpass(80, i, hard=True))
 
