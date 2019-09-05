@@ -8,26 +8,26 @@ from colr import Colr as c
 parser = argparse.ArgumentParser()
 parser.add_argument('path', help="path to image file")
 parser.add_argument('--kernel', dest='kernel', metavar='K', type=int, default=3, help="size of the kernel")
-parser.add_argument('--no-color', help="Print without coloration", action='store_true')
+parser.add_argument('--no-color', dest='no-color', help="Print without coloration", action='store_true')
 args = vars(parser.parse_args())
 
 KERN = args['kernel']
 
 assert(args.get('path', 0)), "A file path was not provided!"
 
-ascii_fillers = ["*", "&", "#", "@", "0", "%", "^", "S", "=", "~", ":" ","]
+ascii_fillers = ["*", "&", "#", "@", "0", "%", "^", "S", "=", "~", ":" ",", "!"]
 
 orig = resize_by_multiples(Image.open(args['path']), KERN)
 mode_filter = ImageFilter.ModeFilter(size=KERN)
 
 color_img = orig.filter(mode_filter).filter(ImageFilter.EDGE_ENHANCE_MORE)
 color_img = ImageOps.posterize(color_img, 3)
+
 grey_img = color_img.convert("L")
 
-orig = ImageOps.autocontrast(orig.filter(ImageFilter.EDGE_ENHANCE_MORE), 10).filter(ImageFilter.GaussianBlur)
+orig = orig.filter(ImageFilter.GaussianBlur)
 grey_pxl = grey_img.load()
 color_pxl = orig.load()
-
 
 min_grey_value = 254//(len(ascii_fillers)-1)
 w, h = grey_img.size
