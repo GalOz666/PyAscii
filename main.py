@@ -1,4 +1,5 @@
 import argparse
+import random
 
 from PIL import Image, ImageFilter, ImageOps
 from lib import resize_by_multiples
@@ -9,15 +10,18 @@ parser = argparse.ArgumentParser()
 parser.add_argument('path', help="path to image file")
 parser.add_argument('--kernel', dest='kernel', metavar='K', type=int, default=3, help="size of the kernel")
 parser.add_argument('--no-color', dest='no-color', help="Print without coloration", action='store_true')
+parser.add_argument('--randomize', dest='random', help='randomize the ASCII used for the image', action='store_true')
+parser.add_argument('--background', dest='background', help="adds a white background to the image", action='store_true')
 args = vars(parser.parse_args())
 
 KERN = args['kernel']
 
-assert(args.get('path', 0)), "A file path was not provided!"
+ascii_fillers = ["*", "&", "#", "@", "0", "%", "S", "-", "^", "~", ";", ",", "!"]
 
-ascii_fillers = ["*", "&", "#", "@", "0", "%", "^", "S", "=", "~", ":" ",", "!"]
+if args.get('random', 0):
+    random.shuffle(ascii_fillers)
 
-orig = resize_by_multiples(Image.open(args['path']), KERN)
+orig = resize_by_multiples(image=Image.open(args['path']), multiple=KERN*KERN, char_limit=100)
 mode_filter = ImageFilter.ModeFilter(size=KERN)
 
 color_img = orig.filter(mode_filter).filter(ImageFilter.EDGE_ENHANCE_MORE)
@@ -43,5 +47,9 @@ for y_step in range(0, h, KERN*KERN):
 
     if args.get('no-color', 0):
         print(*[char for char, color in line])
+    elif args.get('background', 0):
+        print(*[c().bgwhite().rgb(*color, char).bgwhite() for char, color in line])
     else:
         print(*[c().rgb(*color, char) for char, color in line])
+
+print(c("").bgblack())
