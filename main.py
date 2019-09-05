@@ -39,7 +39,7 @@ for y_step in range(0, h, KERN*KERN):
 
     # print(*[c().rgb(*color, char) for char, color in line])
     print([(*color, char) for char, color in line])
-
+    print(*color)
 
 
 
