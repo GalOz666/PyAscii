@@ -37,9 +37,8 @@ for y_step in range(0, h, KERN*KERN):
         color = color_kern[0][0]
         line.append((char, color))
 
-    # print(*[c().rgb(*color, char) for char, color in line])
-    print([(*color, char) for char, color in line])
-    print(*color)
+    print(*[c().rgb(*color, char) for char, color in line])
+    # print([(*color, char) for char, color in line])
 
 
 
