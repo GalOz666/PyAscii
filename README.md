@@ -16,11 +16,11 @@ Where IMAGE_PATH directs to an absolute or relative location of an image.
 
 
 # Additional arguments
-''' --kernel [int] <-- the size of the kernel used for processing the image (i.e., 3 = 3*3, 5 = 5*5, etc.)
+```--kernel [int] <-- the size of the kernel used for processing the image (i.e., 3 = 3*3, 5 = 5*5, etc.)
 --no-color <-- disable coloring and just show pure ASCII
 --randomize <-- randomize the ascii characters used for each run
 --background <-- adds a white background to the result
-'''
+```
 
 # Examples:
 Here's a colorful, yellow-centeric, doge example:
