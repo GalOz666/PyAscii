@@ -11,7 +11,7 @@ parser.add_argument('path', help="path to image file")
 parser.add_argument('--kernel', dest='kernel', metavar='K', type=int, default=3, help="size of the kernel")
 parser.add_argument('--no-color', dest='no-color', help="Print without coloration", action='store_true')
 parser.add_argument('--randomize', dest='random', help='randomize the ASCII used for the image', action='store_true')
-parser.add_argument('--background', dest='background', help="adds a white background to the image", action='store_true')
+parser.add_argument('--background', dest='background', help="adds a white background to the result", action='store_true')
 args = vars(parser.parse_args())
 
 KERN = args['kernel']
