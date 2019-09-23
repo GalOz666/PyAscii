@@ -33,7 +33,7 @@ orig = orig.filter(ImageFilter.GaussianBlur)
 grey_pxl = grey_img.load()
 color_pxl = orig.load()
 
-min_grey_value = 254//(len(ascii_fillers)-1)
+min_grey_value = round(254/(len(ascii_fillers)-1))
 w, h = grey_img.size
 
 for y_step in range(0, h, KERN*KERN):
