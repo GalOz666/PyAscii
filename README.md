@@ -9,7 +9,7 @@ pip install -r requirements.txt
 
 then, navigate to the PyAscii folder and simply run
 ```
-main.py IMAGE_PATH
+python main.py IMAGE_PATH
 ```
 Where IMAGE_PATH directs to an absolute or relative location of an image. 
 
@@ -35,7 +35,7 @@ Here's a dark kitty:
 ![](images/ravi.jpeg) ![](images/ravi_back.jpeg)
 
 # Note
-
+- Supports Python 3.4+
 - Currently only tested on MacOS but it should serve fine on other OSs.
 - Inspired partly by the following module:
 https://www.hackerearth.com/practice/notes/beautiful-python-a-simple-ascii-art-generator-from-images/
